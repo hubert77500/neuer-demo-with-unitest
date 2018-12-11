@@ -92,15 +92,10 @@ public class CategoryService {
 
     public List<SavedCategoryCount> calculateOcurrencies(List<Data> validList){
         List<String> categories = new ArrayList<>();
-        List<SavedCategoryCount> report = new ArrayList<>();
-        for(Data data : validList){
-            categories.add(data.getCategory().getCategoryName());
-        }
-
+        validList.forEach((data) -> categories.add(data.getCategory().getCategoryName()));
+        List<SavedCategoryCount> reportObject = new ArrayList<>();
         Set<String> unique = new HashSet<String>(categories);
-        for (String key : unique) {
-            report.add(new SavedCategoryCount(key, Collections.frequency(categories, key)));
-        }
-        return report;
+        unique.forEach((key)-> reportObject.add(new SavedCategoryCount(key, Collections.frequency(categories, key))));
+        return reportObject;
     }
 }
