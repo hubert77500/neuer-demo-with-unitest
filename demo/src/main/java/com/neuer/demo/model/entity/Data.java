@@ -56,4 +56,13 @@ public class Data {
     public int hashCode() {
         return Objects.hash(getCategory(), getSubCategory());
     }
+
+    @Override
+    public String toString() {
+        return "Data{" +
+                "id=" + id +
+                ", category=" + category +
+                ", subCategory='" + subCategory + '\'' +
+                '}';
+    }
 }

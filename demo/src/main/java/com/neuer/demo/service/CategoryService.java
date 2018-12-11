@@ -69,7 +69,7 @@ public class CategoryService {
         categoryDao.delete(category);
     }
 
-    public List<Data> validateCategories(List<Data> multipleDataRegisters){
+    public List<Data> validateCategories(List<Data> multipleDataRegisters) {
         if (multipleDataRegisters == null) {
             log.error("Error found in validateCategories(List<Data> multipleDataRegisters)");
             throw new InvalidInputException("Unable to validate a null list");
