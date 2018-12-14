@@ -36,7 +36,7 @@ public class DataService {
             throw new InvalidInputException("Unable to create a list to show, there is no data");
         }
         Page<Data> listFound = dataDao.findAll(pageable);
-        if(listFound == null){
+        if(listFound == null) {
             log.error("Error found in DataService.list(Pageable pageable)");
             throw new NoDataFoundException("Unable to create a list to show, there is no data found");
         }

@@ -87,10 +87,10 @@ public class CategoryService {
         List<Data> listWithoutDuplicates = validatedList.stream()
                 .distinct()
                 .collect(Collectors.toList());
-        return  listWithoutDuplicates;
+        return listWithoutDuplicates;
     }
 
-    public List<SavedCategoryCount> calculateOcurrencies(List<Data> validList){
+    public List<SavedCategoryCount> calculateOcurrencies(List<Data> validList) {
         List<String> categories = new ArrayList<>();
         validList.forEach((data) -> categories.add(data.getCategory().getCategoryName()));
         List<SavedCategoryCount> reportObject = new ArrayList<>();
