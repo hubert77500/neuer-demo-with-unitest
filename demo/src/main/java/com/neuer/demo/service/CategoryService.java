@@ -1,6 +1,7 @@
 package com.neuer.demo.service;
 
 import com.neuer.demo.dao.CategoryDao;
+import com.neuer.demo.interfaces.BasicService;
 import com.neuer.demo.model.entity.Category;
 import com.neuer.demo.model.entity.Data;
 import com.neuer.demo.model.exception.CategoryNotFoundException;
@@ -16,8 +17,10 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.neuer.demo.util.constants.Constants.CATEGORY_SERVICE_DESCRIPTION;
+
 @Service
-public class CategoryService {
+public class CategoryService implements BasicService {
 
     private static Logger log = LoggerFactory.getLogger(CategoryService.class.getName());
     @Autowired
@@ -91,11 +94,20 @@ public class CategoryService {
     }
 
     public List<SavedCategoryCount> calculateOcurrencies(List<Data> validList) {
+
+        /////
         List<String> categories = new ArrayList<>();
+        Set<String> unique = new HashSet<String>(categories);
+
         validList.forEach((data) -> categories.add(data.getCategory().getCategoryName()));
         List<SavedCategoryCount> reportObject = new ArrayList<>();
-        Set<String> unique = new HashSet<String>(categories);
+
         unique.forEach((key)-> reportObject.add(new SavedCategoryCount(key, Collections.frequency(categories, key))));
         return reportObject;
+    }
+
+    @Override
+    public String getServiceDescription() {
+        return CATEGORY_SERVICE_DESCRIPTION;
     }
 }

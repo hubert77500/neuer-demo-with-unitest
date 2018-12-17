@@ -1,6 +1,7 @@
 package com.neuer.demo.service;
 
 import com.neuer.demo.dao.DataDao;
+import com.neuer.demo.interfaces.BasicService;
 import com.neuer.demo.model.entity.Data;
 import com.neuer.demo.model.exception.InvalidInputException;
 import com.neuer.demo.model.exception.NeuerException;
@@ -17,8 +18,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
+import static com.neuer.demo.util.constants.Constants.CATEGORY_SERVICE_DESCRIPTION;
+import static com.neuer.demo.util.constants.Constants.DATA_SERVICE_DESCRIPTION;
+
 @Service
-public class DataService {
+public class DataService implements BasicService {
 
     private static Logger log = LoggerFactory.getLogger(DataService.class.getName());
 
@@ -61,5 +65,10 @@ public class DataService {
         //Do the response to show to the client
         CategoryParsedResponse cpr = new CategoryParsedResponse(validList,savedCategoriesReport);
         return cpr;
+    }
+
+    @Override
+    public String getServiceDescription() {
+        return DATA_SERVICE_DESCRIPTION;
     }
 }
