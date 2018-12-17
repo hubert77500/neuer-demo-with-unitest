@@ -94,15 +94,16 @@ public class CategoryService implements BasicService {
     }
 
     public List<SavedCategoryCount> calculateOcurrencies(List<Data> validList) {
-
-        /////
-        List<String> categories = new ArrayList<>();
-        Set<String> unique = new HashSet<String>(categories);
-
-        validList.forEach((data) -> categories.add(data.getCategory().getCategoryName()));
+        List<String> categoryNames = new ArrayList<>();
+        //Unique Category names
+        Set<String> unique = new HashSet<String>(categoryNames);
+        //return Object
         List<SavedCategoryCount> reportObject = new ArrayList<>();
 
-        unique.forEach((key)-> reportObject.add(new SavedCategoryCount(key, Collections.frequency(categories, key))));
+        validList.forEach((data) -> {
+            categoryNames.add(data.getCategory().getCategoryName());
+            unique.forEach((key)-> reportObject.add(new SavedCategoryCount(key, Collections.frequency(categoryNames, key))));
+        });
         return reportObject;
     }
 
